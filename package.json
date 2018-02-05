@@ -10,17 +10,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/foxford/mqtt-client-js.git"
+    "url": "git+https://github.com/netology-group/mqtt-client-js.git"
   },
   "keywords": [
     "mqtt"
   ],
-  "author": "foxford",
+  "author": "netology-group",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/foxford/mqtt-client-js/issues"
+    "url": "https://github.com/netology-group/mqtt-client-js/issues"
   },
-  "homepage": "https://github.com/foxford/mqtt-client-js#readme",
+  "homepage": "https://github.com/netology-group/mqtt-client-js#readme",
   "dependencies": {
     "mqtt": "~2.15.1"
   },
