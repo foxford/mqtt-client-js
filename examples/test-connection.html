@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Test connection | MQTTClient</title>
+  <script src="../dist/index.js"></script>
+</head>
+<body>
+<button id="test-button">Connect</button>
+
+<script>
+  var btn = document.getElementById('test-button')
+  var client;
+
+  btn.addEventListener('click', function (event) {
+    init()
+  })
+
+  function init() {
+    var BROKER = 'ws://iot.eclipse.org:80/ws'
+    var subTopic = 'test/topic/1/#'
+    var pubTopic = 'test/topic/1/2/3'
+    var options = {
+      username: 'foo@bar.baz',
+      password: 'test123456',
+      clientId: 'test_connection_123456'
+    }
+
+    client = new MQTTClient(BROKER, options)
+
+    client.on(MQTTClient.events.CLOSE, function() {
+      console.log('[close]')
+    })
+
+    client.on(MQTTClient.events.OFFLINE, function() {
+      console.log('[offline]')
+    })
+
+    client.on(MQTTClient.events.ERROR, function(err) {
+      console.log('[error]', err)
+    })
+
+    client.on(MQTTClient.events.MESSAGE, function (topic, message) {
+      console.log('[message]', topic, message.toString())
+      client.disconnect()
+    })
+
+    client.on(MQTTClient.events.CONNECT, function (event) {
+      console.log('[connect]', event)
+
+      client.subscribe(subTopic, null, function (err, data) {
+        if (err) {
+          console.error('[subscribe]', err)
+
+          return
+        }
+
+        console.log('[subscribe]', data)
+
+        client.publish(pubTopic, 'Hello, MQTT!')
+      })
+
+    })
+  }
+</script>
+</body>
+</html>
