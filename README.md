@@ -1,4 +1,4 @@
-# MQTTClient
+# MQTT client
 MQTT client implementation for JavaScript
 
 ## Installation

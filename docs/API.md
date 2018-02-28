@@ -9,6 +9,11 @@ Options includes (if specified):
 * `clientId`: id of the client
 * `username`: the username required by your broker, if any
 * `password`: the password required by your broker, if any
+* `will`: a message would be automatically sent by the broker when the client has been disconnected badly. The format is:
+    * `topic`: the topic to publish
+    * `payload`: the message to publish
+    * `qos`: the QoS
+    * `retain`: the retain flag
 
 ## Properties
 

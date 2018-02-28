@@ -7,26 +7,44 @@
   <script src="../dist/index.js"></script>
 </head>
 <body>
-<button id="test-button">Connect</button>
+
+<button id="button-connect">Connect</button>
+<button id="button-disconnect" disabled>Disconnect</button>
 
 <script>
-  var btn = document.getElementById('test-button')
+  var btnConnect = document.getElementById('button-connect')
+  var btnDisconnect = document.getElementById('button-disconnect')
   var client;
+  var BROKER = 'wss://iot.eclipse.org:443/ws'
+  var subTopic = 'test/topic/1/#'
+  var pubTopic = 'test/topic/1/2/3'
+  var lwtTopic = 'agents/123/status'
+  var lwtPayloadOnline = 'online'
+  var lwtPayloadOffline = 'offline'
+  var options = {
+    username: 'foo@bar.baz',
+    password: 'test123456',
+    clientId: 'test_connection_123456',
+    will: {
+      topic: lwtTopic,
+      payload: lwtPayloadOffline,
+      retain: true
+    }
+  }
 
-  btn.addEventListener('click', function (event) {
+  btnConnect.addEventListener('click', function (event) {
+    btnConnect.disabled = true
+    btnDisconnect.disabled = false
     init()
   })
 
-  function init() {
-    var BROKER = 'ws://iot.eclipse.org:80/ws'
-    var subTopic = 'test/topic/1/#'
-    var pubTopic = 'test/topic/1/2/3'
-    var options = {
-      username: 'foo@bar.baz',
-      password: 'test123456',
-      clientId: 'test_connection_123456'
-    }
+  btnDisconnect.addEventListener('click', function (event) {
+    btnConnect.disabled = false
+    btnDisconnect.disabled = true
+    disconnect()
+  })
 
+  function init() {
     client = new MQTTClient(BROKER, options)
 
     client.on(MQTTClient.events.CLOSE, function() {
@@ -43,11 +61,12 @@
 
     client.on(MQTTClient.events.MESSAGE, function (topic, message) {
       console.log('[message]', topic, message.toString())
-      client.disconnect()
     })
 
     client.on(MQTTClient.events.CONNECT, function (event) {
       console.log('[connect]', event)
+
+      client.publish(lwtTopic, lwtPayloadOnline, {retain: true})
 
       client.subscribe(subTopic, null, function (err, data) {
         if (err) {
@@ -62,6 +81,11 @@
       })
 
     })
+  }
+
+  function disconnect () {
+    client.publish(lwtTopic, lwtPayloadOffline, {retain: true})
+    client.disconnect()
   }
 </script>
 </body>

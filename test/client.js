@@ -1,7 +1,7 @@
 import { assert } from 'chai'
 import MQTTClient from '../index'
 
-const BROKER = 'ws://iot.eclipse.org:80/ws'
+const BROKER = 'wss://iot.eclipse.org:443/ws'
 
 describe('Class', function () {
   it('should be defined', function () {
