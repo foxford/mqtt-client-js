@@ -26,6 +26,10 @@ class MQTTClient {
       if (options.clientId) {
         config.clientId = options.clientId
       }
+
+      if (options.will && typeof options.will === 'object') {
+        config.will = Object.assign({}, options.will)
+      }
     }
 
     this._client = mqtt.connect(url, config)
