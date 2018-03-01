@@ -25,6 +25,4 @@ yarn.lock
 .Spotlight-V100
 .Trashes
 
-/docs/*
-!/docs/*.md
-# ignore all except *.md files
+docs-compiled/
