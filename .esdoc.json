@@ -1,0 +1,24 @@
+{
+  "source": "./src",
+  "destination": "./docs",
+  "plugins": [
+    {
+      "name": "esdoc-standard-plugin",
+      "option": {
+        "manual": {
+          "globalIndex": true,
+          "index": "./docs/API.md",
+          "files": [
+            "./docs/API.md"
+          ]
+        },
+        "test": {
+          "source": "./test/",
+          "interfaces": ["describe", "it", "context", "suite", "test"],
+          "includes": ["\\.js$"],
+          "excludes": ["\\.config\\.js$"]
+        }
+      }
+    }
+  ]
+}
