@@ -53,7 +53,7 @@ class MQTTClient {
     this._client.on(eventName, eventHandler)
   }
   off (eventName, eventHandler) {
-    this._client.off(eventName, eventHandler)
+    this._client.removeListener(eventName, eventHandler)
   }
 }
 
