@@ -71,4 +71,12 @@ describe('Instance methods', function () {
       })
     })
   })
+  it('should add listener and remove it', function () {
+    const client = new MQTTClient(BROKER)
+
+    function messageEventHandler (topic, message) {}
+
+    client.on(MQTTClient.events.MESSAGE, messageEventHandler)
+    client.off(MQTTClient.events.MESSAGE, messageEventHandler)
+  })
 })
