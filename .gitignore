@@ -26,3 +26,5 @@ yarn.lock
 .Trashes
 
 docs-compiled/
+dist/
+lib/

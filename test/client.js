@@ -14,14 +14,14 @@ describe('Class', function () {
     const client = new MQTTClient(BROKER)
 
     assert.equal(client instanceof MQTTClient, true)
-
-    client.disconnect()
   })
 })
 
 describe('Instance methods', function () {
   it('should connect to broker', function (done) {
     const client = new MQTTClient(BROKER)
+
+    client.connect()
 
     client.on(MQTTClient.events.CONNECT, function (event) {
       client.disconnect()
@@ -30,6 +30,8 @@ describe('Instance methods', function () {
   })
   it('should subscribe to topic', function (done) {
     const client = new MQTTClient(BROKER)
+
+    client.connect()
 
     client.subscribe('test/topic', null, function (err, event) {
       client.disconnect()
@@ -47,6 +49,8 @@ describe('Instance methods', function () {
     const client = new MQTTClient(BROKER)
     const TOPIC = 'test/topic/1'
     const MESSAGE = 'hello world'
+
+    client.connect()
 
     client.on(MQTTClient.events.CONNECT, function (event) {
       client.on(MQTTClient.events.MESSAGE, function (topic, message) {
@@ -73,6 +77,8 @@ describe('Instance methods', function () {
   })
   it('should add listener and remove it', function () {
     const client = new MQTTClient(BROKER)
+
+    client.connect()
 
     function messageEventHandler (topic, message) {}
 

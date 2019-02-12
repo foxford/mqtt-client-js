@@ -45,18 +45,22 @@
   })
 
   function init() {
-    client = new MQTTClient(BROKER, options)
+    client = new MQTTClient(BROKER)
+
+    client.connect(options)
+
+    Object.keys(MQTTClient.events).forEach(function(key) {
+      client.on(MQTTClient.events[key], function () {
+        console.log('[' + key + ']', arguments)
+      })
+    })
 
     client.on(MQTTClient.events.CLOSE, function() {
-      console.log('[close]')
+      client.disconnect()
     })
 
     client.on(MQTTClient.events.OFFLINE, function() {
-      console.log('[offline]')
-    })
-
-    client.on(MQTTClient.events.ERROR, function(err) {
-      console.log('[error]', err)
+      client.disconnect()
     })
 
     client.on(MQTTClient.events.MESSAGE, function (topic, message) {
@@ -64,8 +68,8 @@
     })
 
     client.on(MQTTClient.events.CONNECT, function (event) {
-      console.log('[connect]', event)
-
+      client.subscribe(subTopic)
+      client.subscribe(lwtTopic)
       client.publish(lwtTopic, lwtPayloadOnline, {retain: true})
 
       client.subscribe(subTopic, null, function (err, data) {
