@@ -8,31 +8,24 @@ class MQTTClient {
       CLOSE: 'close',
       OFFLINE: 'offline',
       ERROR: 'error',
-      MESSAGE: 'message'
+      END: 'end',
+      MESSAGE: 'message',
+      PACKETSEND: 'packetsend',
+      PACKETRECEIVE: 'packetreceive'
     }
   }
-  constructor (url, options) {
-    const config = {}
-
-    if (options) {
-      if (options.username) {
-        config.username = options.username
-      }
-
-      if (options.password) {
-        config.password = options.password
-      }
-
-      if (options.clientId) {
-        config.clientId = options.clientId
-      }
-
-      if (options.will && typeof options.will === 'object') {
-        config.will = Object.assign({}, options.will)
-      }
-    }
-
-    this._client = mqtt.connect(url, config)
+  constructor (url) {
+    this._client = null
+    this._url = url
+  }
+  get connected () {
+    return this._client.connected
+  }
+  get reconnecting () {
+    return this._client.reconnecting
+  }
+  connect (options) {
+    this._client = mqtt.connect(this._url, options)
   }
   disconnect () {
     this._client.end()

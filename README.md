@@ -4,13 +4,15 @@ MQTT client implementation for JavaScript
 ## Installation
 
 ```sh
-npm install --save git+https://github.com/netology-group/mqtt-client-js.git
+npm install --save @netology-group/mqtt-client
 ```
 
 ## Example
 
 ```js
 const client = new MQTTClient('ws://iot.eclipse.org:80/ws')
+
+client.connect()
 
 client.on(MQTTClient.events.MESSAGE, function (topic, message) {
   console.log('[message]', topic, message.toString())
