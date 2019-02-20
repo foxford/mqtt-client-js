@@ -1,8 +1,9 @@
 {
   "name": "@netology-group/mqtt-client",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "MQTT client implementation for JavaScript",
   "files": [
+    "dist",
     "lib"
   ],
   "main": "lib/index.js",
