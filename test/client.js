@@ -47,7 +47,7 @@ describe('Instance methods', function () {
   })
   it('should publish to topic and receive message', function (done) {
     const client = new MQTTClient(BROKER)
-    const TOPIC = 'test/topic/1'
+    const TOPIC = 'test/topic/123'
     const MESSAGE = 'hello world'
 
     client.connect()
