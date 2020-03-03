@@ -15,15 +15,15 @@
   var btnConnect = document.getElementById('button-connect')
   var btnDisconnect = document.getElementById('button-disconnect')
   var client;
-  var BROKER = 'wss://iot.eclipse.org:443/ws'
+  var BROKER = 'wss://test.mosquitto.org:8081/'
   var subTopic = 'test/topic/1/#'
   var pubTopic = 'test/topic/1/2/3'
   var lwtTopic = 'agents/123/status'
   var lwtPayloadOnline = 'online'
   var lwtPayloadOffline = 'offline'
   var options = {
-    username: 'foo@bar.baz',
-    password: 'test123456',
+//    username: 'foo@bar.baz',
+//    password: 'test123456',
     clientId: 'test_connection_123456',
     will: {
       topic: lwtTopic,
