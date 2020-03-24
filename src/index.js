@@ -60,8 +60,8 @@ class MQTTClient {
     this._client.on(MQTTClient.events.MESSAGE, this._handleMessageEvent)
   }
 
-  disconnect () {
-    this._client.end()
+  disconnect (...args) {
+    this._client.end(...args)
   }
 
   reconnect () {
