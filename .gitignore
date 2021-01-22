@@ -28,3 +28,5 @@ yarn.lock
 docs-compiled/
 dist/
 lib/
+coverage/
+.nyc_output/

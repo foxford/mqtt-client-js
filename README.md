@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/netology-group/mqtt-client-js/branch/master/graph/badge.svg?token=e8wYp0pAiX)](https://codecov.io/gh/netology-group/mqtt-client-js)
+
 # MQTT client
 MQTT client implementation for JavaScript
 
