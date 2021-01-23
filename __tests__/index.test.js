@@ -1,6 +1,11 @@
 import MQTTClient from '../src'
+import WS from 'jest-websocket-mock'
 
-const BROKER = 'wss://test.mosquitto.org:8081/'
+const BROKER = 'ws://localhost:1234'
+
+afterAll(() => {
+  WS.clean()
+})
 
 describe('Class', () => {
   it('should be defined', () => {
@@ -13,5 +18,19 @@ describe('Class', () => {
     const client = new MQTTClient(BROKER)
 
     expect(client).toBeInstanceOf(MQTTClient)
+  })
+})
+
+describe('Instance methods', function () {
+  it('should connect to broker', async function (done) {
+    const client = new MQTTClient(BROKER)
+    const server = new WS(BROKER)
+    await server.connected
+    client.connect()
+
+    client.on(MQTTClient.events.CONNECT, function () {
+      client.disconnect()
+      done()
+    })
   })
 })
