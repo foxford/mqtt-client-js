@@ -1,2 +1,2 @@
 import 'regenerator-runtime/runtime'
-jest.setTimeout(8000)
+jest.setTimeout(5000)
