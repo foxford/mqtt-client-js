@@ -1,0 +1,28 @@
+version: v1.0
+name: mqtt-client-js
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+execution_time_limit:
+  minutes: 5
+blocks:
+  - name: "install"
+    dependencies: []
+    task:
+      jobs:
+        - name: "Install 🗂"
+          commands:
+            - checkout
+            - cache restore node-modules-$SEMAPHORE_GIT_BRANCH-$(checksum package-lock.json),node-modules-$SEMAPHORE_GIT_BRANCH,node-modules-master
+            - npm ci
+            - cache store node-modules-$SEMAPHORE_GIT_BRANCH-$(checksum package-lock.json) node_modules
+  - name: "test"
+    dependencies: ["install"]
+    task:
+      jobs:
+        - name: "Test 🛠"
+          commands:
+            - checkout
+            - cache restore node-modules-$SEMAPHORE_GIT_BRANCH-$(checksum package-lock.json)
+            - npm test
