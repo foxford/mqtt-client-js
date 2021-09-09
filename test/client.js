@@ -1,5 +1,5 @@
 import { assert } from 'chai'
-import MQTTClient from '../index'
+import { MQTTClient } from '../index'
 
 const BROKER = 'wss://test.mosquitto.org:8081/'
 

@@ -1,6 +1,6 @@
 {
-  "name": "@netology-group/mqtt-client",
-  "version": "0.4.2",
+  "name": "@ulms/mqtt-client",
+  "version": "0.5.0",
   "description": "MQTT client implementation for JavaScript",
   "files": [
     "dist",
@@ -20,17 +20,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/netology-group/mqtt-client-js.git"
+    "url": "git+https://github.com/foxford/mqtt-client-js.git"
   },
   "keywords": [
     "mqtt"
   ],
-  "author": "netology-group",
+  "author": "foxford",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/netology-group/mqtt-client-js/issues"
+    "url": "https://github.com/foxford/mqtt-client-js/issues"
   },
-  "homepage": "https://github.com/netology-group/mqtt-client-js#readme",
+  "homepage": "https://github.com/foxford/mqtt-client-js#readme",
   "dependencies": {
     "mqtt": "~3.0.0",
     "mqtt-pattern": "~1.2.0"
